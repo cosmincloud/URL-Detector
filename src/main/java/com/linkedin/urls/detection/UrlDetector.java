@@ -545,6 +545,10 @@ public class UrlDetector {
         return readPort();
       case ReadQueryString:
         return readQueryString();
+      case ReadUserPass:
+        int host = _currentUrlMarker.indexOf(UrlPart.HOST);
+        _currentUrlMarker.unsetIndex(UrlPart.HOST);
+        return readUserPass(host);
       default:
         return readEnd(ReadEndState.InvalidUrl);
     }
