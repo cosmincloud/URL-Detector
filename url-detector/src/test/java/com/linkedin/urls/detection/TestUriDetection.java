@@ -660,4 +660,14 @@ public class TestUriDetection {
 
     Assert.assertEqualsNoOrder(foundArray, expected);
   }
+
+  @Test
+  public void testTwoUrls() {
+    runTest("http://user:pass@host.com host.com", UrlDetectorOptions.Default, "http://user:pass@host.com", "host.com");
+  }
+
+  @Test
+  public void testSlashes() {
+    runTest("://TEST//:@.", UrlDetectorOptions.Default);
+  }
 }
