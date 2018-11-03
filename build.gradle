@@ -1,38 +1,23 @@
+apply plugin: 'java-library'
 
+group = "cloud.cosmin.lib"
 
-boolean isDefaultEnvironment() {
-  !project.hasProperty('overrideBuildEnvironment')
+repositories {
+  mavenCentral()
 }
 
-File getEnvironmentScript()
-{
-  final File env = file(defaultEnvironment ? 'defaultEnvironment.gradle' : project.overrideBuildEnvironment)
-  assert env.isFile() : "The environment script [$env] does not exists or is not a file."
-  return env
+dependencies {
+  implementation "org.apache.commons:commons-lang3:3.1"
+  testCompile "org.testng:testng:6.1.1"
 }
 
-apply from: environmentScript
+test {
+  // enable TestNG support (default is JUnit)
+  useTestNG()
 
-
-subprojects {
-  plugins.withType(JavaPlugin) {
-
-    dependencies {
-      testCompile spec.external.testng
-      compile spec.external.'commonsLang'
-    }
-
-    test {
-      afterSuite { desc, result ->
-        if (!desc.parent) {
-          println ":${project.name} -- Executed ${result.testCount} tests: ${result.successfulTestCount} succeeded, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped"
-        }
-      }
-    }
-
-    test.useTestNG() {
-      excludeGroups 'integration'
+  afterSuite { desc, result ->
+    if (!desc.parent) {
+      println ":${project.name} -- Executed ${result.testCount} tests: ${result.successfulTestCount} succeeded, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped"
     }
   }
 }
-

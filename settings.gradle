@@ -1,1 +1,1 @@
-include "url-detector"
+rootProject.name="url-detector"
