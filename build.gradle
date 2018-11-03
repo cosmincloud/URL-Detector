@@ -1,4 +1,5 @@
-apply plugin: 'java-library'
+apply plugin: "java-library"
+apply plugin: "maven-publish"
 
 group = "cloud.cosmin.lib"
 
@@ -18,6 +19,21 @@ test {
   afterSuite { desc, result ->
     if (!desc.parent) {
       println ":${project.name} -- Executed ${result.testCount} tests: ${result.successfulTestCount} succeeded, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped"
+    }
+  }
+}
+
+publishing {
+  publications {
+    urlDetector(MavenPublication) {
+      from components.java
+    }
+  }
+
+  repositories {
+    maven {
+      name = "onawh.im"
+      url = "file://${buildDir}/repo"
     }
   }
 }
