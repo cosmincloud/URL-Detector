@@ -86,3 +86,9 @@ This library was written by the security team and Linkedin when other options di
 * http://commons.apache.org/proper/commons-lang/
 * Copyright © 2001-2014 The Apache Software Foundation
 * License: Apache 2.0
+
+---
+## Other active forks
+
+It seems I'm not the only one that forked the URL-Detector repo.  Here are some other active forks:
+* [pgalbraith/URL-Detector](https://github.com/pgalbraith/URL-Detector)
