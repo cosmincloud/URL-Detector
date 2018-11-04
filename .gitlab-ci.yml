@@ -1,0 +1,11 @@
+image: adoptopenjdk/openjdk8:latest
+
+stages:
+  - test
+
+test:
+  stage: test
+  script: ./gradlew build
+  artifacts:
+    paths:
+      - build/reports/tests/test

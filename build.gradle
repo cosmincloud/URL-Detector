@@ -1,38 +1,58 @@
-
-
-boolean isDefaultEnvironment() {
-  !project.hasProperty('overrideBuildEnvironment')
+plugins {
+  id "java-library"
+  id "maven-publish"
 }
 
-File getEnvironmentScript()
-{
-  final File env = file(defaultEnvironment ? 'defaultEnvironment.gradle' : project.overrideBuildEnvironment)
-  assert env.isFile() : "The environment script [$env] does not exists or is not a file."
-  return env
+group = "cloud.cosmin.lib"
+
+repositories {
+  mavenCentral()
 }
 
-apply from: environmentScript
+dependencies {
+  implementation "org.apache.commons:commons-lang3:3.1"
+  testCompile "org.testng:testng:6.1.1"
+}
 
+tasks.withType(JavaCompile) {
+  options.encoding = "UTF-8"
+}
 
-subprojects {
-  plugins.withType(JavaPlugin) {
+test {
+  // enable TestNG support (default is JUnit)
+  useTestNG()
 
-    dependencies {
-      testCompile spec.external.testng
-      compile spec.external.'commonsLang'
-    }
-
-    test {
-      afterSuite { desc, result ->
-        if (!desc.parent) {
-          println ":${project.name} -- Executed ${result.testCount} tests: ${result.successfulTestCount} succeeded, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped"
-        }
-      }
-    }
-
-    test.useTestNG() {
-      excludeGroups 'integration'
+  afterSuite { desc, result ->
+    if (!desc.parent) {
+      println ":${project.name} -- Executed ${result.testCount} tests: ${result.successfulTestCount} succeeded, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped"
     }
   }
 }
 
+task sourcesJar(type: Jar) {
+  classifier = 'sources'
+  from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+
+publishing {
+  publications {
+    urlDetector(MavenPublication) {
+      from components.java
+
+      artifact sourcesJar
+      artifact javadocJar
+    }
+  }
+
+  repositories {
+    maven {
+      name = "onawh.im"
+      url = "file://${buildDir}/repo"
+    }
+  }
+}

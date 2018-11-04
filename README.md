@@ -1,6 +1,6 @@
 # Url Detector
 
-The url detector is a library created by the Linkedin Security Team to detect and extract urls in a long piece of text.
+The url detector is a library created by the Linkedin Security Team to detect and extract urls in a long piece of text.  This repository is a fork of the [URL-Detector repository on GitHub.com](https://github.com/linkedin/URL-Detector/).
 
 It is able to find and detect any urls such as:
 
@@ -77,22 +77,18 @@ This library was written by the security team and Linkedin when other options di
 ---
 ## Third Party Dependencies
 
-####TestNG
+### TestNG
 * http://testng.org/
 * Copyright © 2004-2014 Cédric Beust
 * License: Apache 2.0
 
-####Apache CommonsLang3: org.apache.commons:commons-lang3:3.1
+### Apache CommonsLang3: org.apache.commons:commons-lang3:3.1
 * http://commons.apache.org/proper/commons-lang/
 * Copyright © 2001-2014 The Apache Software Foundation
 * License: Apache 2.0
 
 ---
-## License
+## Other active forks
 
-Copyright 2015 LinkedIn Corp. All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the license at http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-
+It seems I'm not the only one that forked the URL-Detector repo.  Here are some other active forks:
+* [pgalbraith/URL-Detector](https://github.com/pgalbraith/URL-Detector)

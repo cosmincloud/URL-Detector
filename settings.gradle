@@ -1,1 +1,2 @@
-include "url-detector"
+rootProject.name="url-detector"
+enableFeaturePreview('STABLE_PUBLISHING')
