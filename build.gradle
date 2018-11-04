@@ -14,7 +14,7 @@ dependencies {
   testCompile "org.testng:testng:6.1.1"
 }
 
-compileJava {
+tasks.withType(Compile) {
   options.encoding = "UTF-8"
 }
 
